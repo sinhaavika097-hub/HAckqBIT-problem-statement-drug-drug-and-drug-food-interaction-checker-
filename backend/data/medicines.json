@@ -1,0 +1,74 @@
+[
+  {
+    "id": "med-warfarin",
+    "name": "Warfarin",
+    "genericName": "Warfarin Sodium",
+    "brandNames": ["Coumadin", "Jantoven", "Warf"],
+    "dosage": "5mg",
+    "category": "Anticoagulant",
+    "atcCode": "B01AA03"
+  },
+  {
+    "id": "med-aspirin",
+    "name": "Aspirin",
+    "genericName": "Acetylsalicylic acid",
+    "brandNames": ["Ecosprin", "Disprin", "Bayer"],
+    "dosage": "75mg",
+    "category": "Antiplatelet / NSAID",
+    "atcCode": "B01AC06"
+  },
+  {
+    "id": "med-atorvastatin",
+    "name": "Atorvastatin",
+    "genericName": "Atorvastatin Calcium",
+    "brandNames": ["Lipitor", "Atorva", "Storvas"],
+    "dosage": "20mg",
+    "category": "Statin / Lipid-lowering",
+    "atcCode": "C10AA05"
+  },
+  {
+    "id": "med-metformin",
+    "name": "Metformin",
+    "genericName": "Metformin Hydrochloride",
+    "brandNames": ["Glucophage", "Glycomet"],
+    "dosage": "500mg",
+    "category": "Antidiabetic / Biguanide",
+    "atcCode": "A10BA02"
+  },
+  {
+    "id": "med-ciprofloxacin",
+    "name": "Ciprofloxacin",
+    "genericName": "Ciprofloxacin Hydrochloride",
+    "brandNames": ["Cifran", "Cipro", "Ciplox"],
+    "dosage": "500mg",
+    "category": "Fluoroquinolone Antibiotic",
+    "atcCode": "J01MA02"
+  },
+  {
+    "id": "med-amlodipine",
+    "name": "Amlodipine",
+    "genericName": "Amlodipine Besylate",
+    "brandNames": ["Norvasc", "Amlong", "Stamlo"],
+    "dosage": "5mg",
+    "category": "Calcium Channel Blocker",
+    "atcCode": "C08CA01"
+  },
+  {
+    "id": "med-clopidogrel",
+    "name": "Clopidogrel",
+    "genericName": "Clopidogrel Bisulfate",
+    "brandNames": ["Plavix", "Deplatt", "Clopilet"],
+    "dosage": "75mg",
+    "category": "Antiplatelet / P2Y12 Inhibitor",
+    "atcCode": "B01AC04"
+  },
+  {
+    "id": "med-paracetamol",
+    "name": "Paracetamol",
+    "genericName": "Acetaminophen",
+    "brandNames": ["Dolo", "Crocin", "Calpol"],
+    "dosage": "650mg",
+    "category": "Analgesic / Antipyretic",
+    "atcCode": "N02BE01"
+  }
+]
