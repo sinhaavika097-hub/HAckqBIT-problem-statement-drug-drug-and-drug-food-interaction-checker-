@@ -5,7 +5,13 @@ import {
   SupportedLanguage,
   InteractionSeverity,
 } from '../types/interactions';
-import { t, speakText, stopSpeech, getLocalizedPatientExplanation } from '../utils/localization';
+import {
+  t,
+  speakText,
+  stopSpeech,
+  getLocalizedPatientExplanation,
+  getLocalizedDoctorSpeech,
+} from '../utils/localization';
 import {
   Volume2,
   Square,
@@ -49,6 +55,14 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
     };
   }, [interaction, currentLanguage]);
 
+  const handleTabSwitch = (newTab: 'PATIENT' | 'DOCTOR') => {
+    if (newTab !== activeTab) {
+      stopSpeech();
+      setIsSpeaking(false);
+      setActiveTab(newTab);
+    }
+  };
+
   if (!interaction) {
     return (
       <div
@@ -87,6 +101,22 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
       setIsSpeaking(false);
     } else {
       const speechContent = `${patientExp.summary}. ${patientExp.whatItMeans}. ${patientExp.actionAdvice}`;
+      const started = speakText(
+        speechContent,
+        currentLanguage,
+        () => setIsSpeaking(false),
+        () => setIsSpeaking(false)
+      );
+      if (started) setIsSpeaking(true);
+    }
+  };
+
+  const handleDoctorVoiceToggle = () => {
+    if (isSpeaking) {
+      stopSpeech();
+      setIsSpeaking(false);
+    } else {
+      const speechContent = getLocalizedDoctorSpeech(interaction, currentLanguage);
       const started = speakText(
         speechContent,
         currentLanguage,
@@ -175,7 +205,7 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
       >
         <button
           type="button"
-          onClick={() => setActiveTab('PATIENT')}
+          onClick={() => handleTabSwitch('PATIENT')}
           style={{
             flex: 1,
             padding: '14px 20px',
@@ -199,7 +229,7 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
 
         <button
           type="button"
-          onClick={() => setActiveTab('DOCTOR')}
+          onClick={() => handleTabSwitch('DOCTOR')}
           style={{
             flex: 1,
             padding: '14px 20px',
@@ -321,6 +351,57 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
         ) : (
           /* Doctor-Facing Clinical Panel */
           <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            {/* Regional Doctor Audio Playback Bar */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 18px',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: isSpeaking ? '#fef3c7' : '#eff6ff',
+                border: `1px solid ${isSpeaking ? '#fde68a' : '#bfdbfe'}`,
+                gap: '12px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Stethoscope size={18} color="#2563eb" />
+                <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#1e3a8a' }}>
+                  {currentLanguage === 'hi'
+                    ? 'डॉक्टर सारांश ऑडियो (हिन्दी)'
+                    : currentLanguage === 'bn'
+                    ? 'ডাক্তারের সারাংশ অডিও (বাংলা)'
+                    : 'Clinical Summary Audio (English)'}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleDoctorVoiceToggle}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '7px 16px',
+                  borderRadius: 'var(--radius-sm)',
+                  border: `1px solid ${isSpeaking ? '#dc2626' : '#2563eb'}`,
+                  backgroundColor: isSpeaking ? '#fef2f2' : '#2563eb',
+                  color: isSpeaking ? '#dc2626' : '#ffffff',
+                  fontWeight: 600,
+                  fontSize: '0.84rem',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--shadow-sm)',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {isSpeaking ? <Square size={15} /> : <Volume2 size={15} />}
+                <span>
+                  {isSpeaking ? t('stopVoice', currentLanguage) : t('listenDoctorSummary', currentLanguage)}
+                </span>
+              </button>
+            </div>
+
             <div style={{ padding: '16px', borderRadius: 'var(--radius-md)', backgroundColor: '#f8fafc', border: '1px solid var(--color-border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155', textTransform: 'uppercase' }}>
