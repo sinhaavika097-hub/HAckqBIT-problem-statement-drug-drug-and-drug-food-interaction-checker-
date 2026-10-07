@@ -5,7 +5,7 @@ import {
   SupportedLanguage,
   InteractionSeverity,
 } from '../types/interactions';
-import { t, speakText, stopSpeech } from '../utils/localization';
+import { t, speakText, stopSpeech, getLocalizedPatientExplanation } from '../utils/localization';
 import {
   Volume2,
   Square,
@@ -75,12 +75,18 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
   const isDrugDrug = interaction.type === 'DRUG_DRUG';
   const sevConfig = SEVERITY_CONFIG[interaction.severity];
 
+  const patientExp = getLocalizedPatientExplanation(
+    interaction.id,
+    currentLanguage,
+    interaction.patientExplanation
+  );
+
   const handleVoiceToggle = () => {
     if (isSpeaking) {
       stopSpeech();
       setIsSpeaking(false);
     } else {
-      const speechContent = `${interaction.patientExplanation.summary}. ${interaction.patientExplanation.whatItMeans}. ${interaction.patientExplanation.actionAdvice}`;
+      const speechContent = `${patientExp.summary}. ${patientExp.whatItMeans}. ${patientExp.actionAdvice}`;
       const started = speakText(
         speechContent,
         currentLanguage,
@@ -278,7 +284,7 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
                   What this means
                 </h4>
                 <p style={{ fontSize: '0.96rem', color: 'var(--color-text-main)', lineHeight: 1.6 }}>
-                  {interaction.patientExplanation.whatItMeans}
+                  {patientExp.whatItMeans}
                 </p>
               </div>
 
@@ -287,7 +293,7 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
                   Why it matters for your health
                 </h4>
                 <p style={{ fontSize: '0.96rem', color: 'var(--color-text-main)', lineHeight: 1.6 }}>
-                  {interaction.patientExplanation.whyItMatters}
+                  {patientExp.whyItMatters}
                 </p>
               </div>
 
@@ -296,7 +302,7 @@ export const InteractionDetails: React.FC<InteractionDetailsProps> = ({
                   What you should do
                 </h4>
                 <p style={{ fontSize: '0.96rem', color: '#166534', lineHeight: 1.6, fontWeight: 500 }}>
-                  {interaction.patientExplanation.actionAdvice}
+                  {patientExp.actionAdvice}
                 </p>
               </div>
 
