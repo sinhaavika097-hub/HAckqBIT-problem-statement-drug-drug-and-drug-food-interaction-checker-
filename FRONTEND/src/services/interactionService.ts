@@ -18,6 +18,7 @@ import {
   MOCK_DRUG_DRUG_INTERACTIONS,
   MOCK_DRUG_FOOD_INTERACTIONS,
   buildMockGraphData,
+  buildMultiMedicineGraphData,
 } from './mockData';
 
 // Configuration: Switch between isolated mock data and live C++ backend
@@ -190,3 +191,73 @@ export async function processPrescriptionOcr(file: File): Promise<ServiceRespons
     return { data: null, error: message, isMock: false };
   }
 }
+
+export interface MultiMedicineResponse {
+  graphData: InteractionGraphData;
+  drugInteractions: DrugDrugInteraction[];
+  foodInteractions: DrugFoodInteraction[];
+}
+
+/**
+ * Retrieves the unified interaction network across an entire list of medications (Polypharmacy Regimen)
+ * Planned C++ Endpoint: POST /api/v1/interactions/regimen
+ */
+export async function getMultiMedicineInteractions(
+  medicineIds: string[]
+): Promise<ServiceResponse<MultiMedicineResponse>> {
+  if (USE_MOCK_DATA) {
+    await new Promise((res) => setTimeout(res, 250));
+
+    const matchedMeds = MOCK_MEDICINES.filter((m) => medicineIds.includes(m.id));
+    if (matchedMeds.length === 0) {
+      return { data: null, error: 'No matching medications found in regimen.', isMock: true };
+    }
+
+    const graph = buildMultiMedicineGraphData(matchedMeds);
+
+    // Collect all pairwise drug-drug interactions present in the regimen
+    const ddis: DrugDrugInteraction[] = [];
+    for (let i = 0; i < matchedMeds.length; i++) {
+      for (let j = i + 1; j < matchedMeds.length; j++) {
+        const medA = matchedMeds[i];
+        const medB = matchedMeds[j];
+        const match = MOCK_DRUG_DRUG_INTERACTIONS.find(
+          (ddi) =>
+            (ddi.primaryDrug.id === medA.id && ddi.interactingDrug.id === medB.id) ||
+            (ddi.primaryDrug.id === medB.id && ddi.interactingDrug.id === medA.id)
+        );
+        if (match) ddis.push(match);
+      }
+    }
+
+    // Collect all drug-food interactions for medicines in the regimen
+    const dfis = MOCK_DRUG_FOOD_INTERACTIONS.filter((dfi) =>
+      medicineIds.includes(dfi.drug.id)
+    );
+
+    return {
+      data: {
+        graphData: graph,
+        drugInteractions: ddis,
+        foodInteractions: dfis,
+      },
+      error: null,
+      isMock: true,
+    };
+  }
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/interactions/regimen`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ medicine_ids: medicineIds }),
+    });
+    if (!res.ok) throw new Error(`Backend error (${res.status}): Failed to retrieve regimen interactions.`);
+    const data: MultiMedicineResponse = await res.json();
+    return { data, error: null, isMock: false };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unable to connect to backend service.';
+    return { data: null, error: message, isMock: false };
+  }
+}
+
