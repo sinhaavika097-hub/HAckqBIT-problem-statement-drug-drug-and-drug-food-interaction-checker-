@@ -1,0 +1,164 @@
+[
+  {
+    "id": "med-warfarin",
+    "name": "Warfarin",
+    "genericName": "Warfarin Sodium",
+    "brandNames": ["Coumadin", "Jantoven", "Warf"],
+    "dosage": "5mg",
+    "category": "Anticoagulant",
+    "atcCode": "B01AA03"
+  },
+  {
+    "id": "med-aspirin",
+    "name": "Aspirin",
+    "genericName": "Acetylsalicylic acid",
+    "brandNames": ["Ecosprin", "Disprin", "Bayer"],
+    "dosage": "75mg",
+    "category": "Antiplatelet / NSAID",
+    "atcCode": "B01AC06"
+  },
+  {
+    "id": "med-atorvastatin",
+    "name": "Atorvastatin",
+    "genericName": "Atorvastatin Calcium",
+    "brandNames": ["Lipitor", "Atorva", "Storvas"],
+    "dosage": "20mg",
+    "category": "Statin / Lipid-lowering",
+    "atcCode": "C10AA05"
+  },
+  {
+    "id": "med-metformin",
+    "name": "Metformin",
+    "genericName": "Metformin Hydrochloride",
+    "brandNames": ["Glucophage", "Glycomet"],
+    "dosage": "500mg",
+    "category": "Antidiabetic / Biguanide",
+    "atcCode": "A10BA02"
+  },
+  {
+    "id": "med-ciprofloxacin",
+    "name": "Ciprofloxacin",
+    "genericName": "Ciprofloxacin Hydrochloride",
+    "brandNames": ["Cifran", "Cipro", "Ciplox"],
+    "dosage": "500mg",
+    "category": "Fluoroquinolone Antibiotic",
+    "atcCode": "J01MA02"
+  },
+  {
+    "id": "med-amlodipine",
+    "name": "Amlodipine",
+    "genericName": "Amlodipine Besylate",
+    "brandNames": ["Norvasc", "Amlong", "Stamlo"],
+    "dosage": "5mg",
+    "category": "Calcium Channel Blocker",
+    "atcCode": "C08CA01"
+  },
+  {
+    "id": "med-clopidogrel",
+    "name": "Clopidogrel",
+    "genericName": "Clopidogrel Bisulfate",
+    "brandNames": ["Plavix", "Deplatt", "Clopilet"],
+    "dosage": "75mg",
+    "category": "Antiplatelet / P2Y12 Inhibitor",
+    "atcCode": "B01AC04"
+  },
+  {
+    "id": "med-paracetamol",
+    "name": "Paracetamol",
+    "genericName": "Acetaminophen",
+    "brandNames": ["Dolo", "Crocin", "Calpol"],
+    "dosage": "650mg",
+    "category": "Analgesic / Antipyretic",
+    "atcCode": "N02BE01"
+  },
+  {
+    "id": "med-metoprolol",
+    "name": "Metoprolol",
+    "genericName": "Metoprolol Tartrate / Succinate",
+    "brandNames": ["Lopressor", "Toprol-XL", "Betaloc", "Metolar"],
+    "dosage": "50mg",
+    "category": "Beta-Blocker / Antihypertensive",
+    "atcCode": "C07AB02"
+  },
+  {
+    "id": "med-omeprazole",
+    "name": "Omeprazole",
+    "genericName": "Omeprazole Magnesium",
+    "brandNames": ["Prilosec", "Omez", "Losec"],
+    "dosage": "20mg",
+    "category": "Proton Pump Inhibitor (PPI)",
+    "atcCode": "A02BC01"
+  },
+  {
+    "id": "med-digoxin",
+    "name": "Digoxin",
+    "genericName": "Digoxin",
+    "brandNames": ["Lanoxin", "Digox"],
+    "dosage": "0.25mg",
+    "category": "Cardiac Glycoside / Antiarrhythmic",
+    "atcCode": "C01AA05"
+  },
+  {
+    "id": "med-levothyroxine",
+    "name": "Levothyroxine",
+    "genericName": "Levothyroxine Sodium",
+    "brandNames": ["Synthroid", "Eltroxin", "Thyronorm"],
+    "dosage": "50mcg",
+    "category": "Thyroid Hormone",
+    "atcCode": "H03AA01"
+  },
+  {
+    "id": "med-furosemide",
+    "name": "Furosemide",
+    "genericName": "Furosemide",
+    "brandNames": ["Lasix", "Frusix"],
+    "dosage": "40mg",
+    "category": "Loop Diuretic",
+    "atcCode": "C03CA01"
+  },
+  {
+    "id": "med-lisinopril",
+    "name": "Lisinopril",
+    "genericName": "Lisinopril Dihydrate",
+    "brandNames": ["Zestril", "Prinivil", "Lipril"],
+    "dosage": "10mg",
+    "category": "ACE Inhibitor / Antihypertensive",
+    "atcCode": "C09AA03"
+  },
+  {
+    "id": "med-spironolactone",
+    "name": "Spironolactone",
+    "genericName": "Spironolactone",
+    "brandNames": ["Aldactone", "Spiractin"],
+    "dosage": "25mg",
+    "category": "Potassium-Sparing Diuretic / Aldosterone Antagonist",
+    "atcCode": "C03DA01"
+  },
+  {
+    "id": "med-rosuvastatin",
+    "name": "Rosuvastatin",
+    "genericName": "Rosuvastatin Calcium",
+    "brandNames": ["Crestor", "Rosuvas", "Rozavel"],
+    "dosage": "10mg",
+    "category": "Statin / Lipid-lowering",
+    "atcCode": "C10AA07"
+  },
+  {
+    "id": "med-pantoprazole",
+    "name": "Pantoprazole",
+    "genericName": "Pantoprazole Sodium",
+    "brandNames": ["Protonix", "Pan", "Pantocid"],
+    "dosage": "40mg",
+    "category": "Proton Pump Inhibitor (PPI)",
+    "atcCode": "A02BC02"
+  },
+  {
+    "id": "med-losartan",
+    "name": "Losartan",
+    "genericName": "Losartan Potassium",
+    "brandNames": ["Cozaar", "Losacar", "Repace"],
+    "dosage": "50mg",
+    "category": "Angiotensin II Receptor Blocker (ARB)",
+    "atcCode": "C09CA01"
+  }
+]

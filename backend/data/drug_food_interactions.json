@@ -1,0 +1,183 @@
+[
+  {
+    "id": "dfi-atorvastatin-grapefruit",
+    "type": "DRUG_FOOD",
+    "drug": {
+      "id": "med-atorvastatin",
+      "name": "Atorvastatin",
+      "genericName": "Atorvastatin Calcium",
+      "dosage": "20mg",
+      "category": "Statin / Lipid-lowering"
+    },
+    "food": {
+      "id": "food-grapefruit",
+      "name": "Grapefruit / Grapefruit Juice",
+      "category": "FRUIT",
+      "commonExamples": ["Fresh grapefruit", "Grapefruit juice", "Seville oranges"]
+    },
+    "severity": "HIGH",
+    "patientExplanation": {
+      "summary": "Grapefruit blocks your body from breaking down Atorvastatin, causing drug levels to build up to dangerous levels.",
+      "whatItMeans": "Compounds in grapefruit inactivate intestinal liver enzymes that normally clear this cholesterol medicine.",
+      "whyItMatters": "Excess drug concentration can lead to severe muscle pain, muscle breakdown (rhabdomyolysis), and kidney injury.",
+      "actionAdvice": "Avoid eating grapefruit or drinking grapefruit juice completely while taking Atorvastatin."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Furanocoumarins irreversibly inhibit intestinal CYP3A4, increasing oral bioavailability and systemic exposure of Atorvastatin by 2-3 fold.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Counsel patient on complete elimination of grapefruit products, or consider statins less dependent on CYP3A4 metabolism.",
+      "monitoringParameters": [
+        "Serum Creatine Kinase (CK)",
+        "Liver function tests (ALT/AST)",
+        "Patient reporting of unexplained myalgia or dark urine"
+      ],
+      "alternativesForReview": [
+        {
+          "id": "alt-rosuvastatin",
+          "medicineName": "Rosuvastatin / Pravastatin",
+          "rationale": "Minimally metabolized by CYP3A4; exhibits minimal pharmacokinetic interaction with grapefruit juice.",
+          "requiresPrescription": true,
+          "safetyNote": "Possible alternative for clinician review only. Do not alter medication without physician consultation."
+        }
+      ]
+    },
+    "dietaryRecommendation": "Avoid grapefruit and Seville oranges completely during therapy. Citrus fruits such as sweet oranges, lemons, and limes are generally acceptable."
+  },
+  {
+    "id": "dfi-warfarin-spinach",
+    "type": "DRUG_FOOD",
+    "drug": {
+      "id": "med-warfarin",
+      "name": "Warfarin",
+      "genericName": "Warfarin Sodium",
+      "dosage": "5mg",
+      "category": "Anticoagulant"
+    },
+    "food": {
+      "id": "food-spinach",
+      "name": "Spinach & Dark Leafy Greens (Vitamin K rich)",
+      "category": "GENERAL_FOOD",
+      "commonExamples": ["Spinach (Palak)", "Kale", "Broccoli", "Collard greens", "Mustard greens"]
+    },
+    "severity": "HIGH",
+    "patientExplanation": {
+      "summary": "Foods rich in Vitamin K (like spinach and dark greens) directly counteract Warfarin and make your blood clot more easily.",
+      "whatItMeans": "Warfarin works by inhibiting Vitamin K. Sudden increases in dietary Vitamin K directly reverse the medicine.",
+      "whyItMatters": "Blood clot risk spikes if your INR drops below target range, increasing chances of stroke or thrombosis.",
+      "actionAdvice": "Keep your intake of green leafy vegetables consistent week-to-week rather than making sudden large changes or binge eating."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Exogenous phylloquinone (vitamin K1) directly promotes hepatic synthesis of prothrombin complex factors (II, VII, IX, X), overcoming competitive inhibition by Warfarin.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Advise consistent weekly dietary intake rather than strict elimination. Perform prompt INR check if diet fluctuates substantially.",
+      "monitoringParameters": [
+        "INR consistency at regular intervals",
+        "Dietary stability assessment"
+      ]
+    },
+    "dietaryRecommendation": "Maintain steady, consistent consumption of green leafy vegetables week-to-week. Avoid sudden large dietary shifts or seasonal binge consumption."
+  },
+  {
+    "id": "dfi-metformin-alcohol",
+    "type": "DRUG_FOOD",
+    "drug": {
+      "id": "med-metformin",
+      "name": "Metformin",
+      "genericName": "Metformin Hydrochloride",
+      "dosage": "500mg",
+      "category": "Antidiabetic / Biguanide"
+    },
+    "food": {
+      "id": "food-alcohol",
+      "name": "Alcoholic Beverages",
+      "category": "ALCOHOL",
+      "commonExamples": ["Beer", "Wine", "Spirits / Liquor"]
+    },
+    "severity": "HIGH",
+    "patientExplanation": {
+      "summary": "Drinking alcohol with Metformin significantly elevates the risk of lactic acidosis, a rare but dangerous medical condition.",
+      "whatItMeans": "Alcohol impairs your liver's ability to process lactate, while Metformin also increases lactic acid levels in the blood.",
+      "whyItMatters": "Can cause severe exhaustion, muscle cramps, stomach discomfort, and difficulty breathing requiring emergency hospital care.",
+      "actionAdvice": "Avoid excessive or binge alcohol consumption while taking Metformin."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Ethanol oxidation increases hepatic cytosolic NADH/NAD+ ratio, inhibiting hepatic gluconeogenesis from lactate and predisposing to Metformin-associated lactic acidosis (MALA).",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Counsel patient on strict moderation or complete avoidance of alcohol; evaluate renal function (eGFR) and hepatic reserve.",
+      "monitoringParameters": [
+        "Serum bicarbonate",
+        "Serum lactate",
+        "eGFR / Serum Creatinine baseline and periodic"
+      ]
+    },
+    "dietaryRecommendation": "Avoid excessive or binge alcohol consumption. Moderate alcohol only with meals if approved by personal physician."
+  },
+  {
+    "id": "dfi-ciprofloxacin-dairy",
+    "type": "DRUG_FOOD",
+    "drug": {
+      "id": "med-ciprofloxacin",
+      "name": "Ciprofloxacin",
+      "genericName": "Ciprofloxacin Hydrochloride",
+      "dosage": "500mg",
+      "category": "Fluoroquinolone Antibiotic"
+    },
+    "food": {
+      "id": "food-dairy",
+      "name": "Milk & Dairy Products (Calcium rich)",
+      "category": "DAIRY",
+      "commonExamples": ["Cow milk", "Yogurt (Curd/Dahi)", "Cheese", "Paneer"]
+    },
+    "severity": "MODERATE",
+    "patientExplanation": {
+      "summary": "Calcium in milk and yogurt binds with Ciprofloxacin, preventing your body from absorbing the antibiotic properly.",
+      "whatItMeans": "Calcium forms an unabsorbable compound with the medicine in your digestive tract.",
+      "whyItMatters": "If your body cannot absorb the medicine into your bloodstream, the bacterial infection may fail to clear.",
+      "actionAdvice": "Take Ciprofloxacin at least 2 hours before or 4 hours after consuming milk, yogurt, paneer, or calcium supplements."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Polyvalent cations (Ca2+) form insoluble chelate complexes with quinolone 3-carboxyl and 4-keto groups, reducing Cmax and bioavailability by over 50-70%.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Counsel patient regarding strict timing separation between antimicrobial dose and dairy ingestion.",
+      "monitoringParameters": [
+        "Clinical resolution of infection",
+        "Patient comprehension of timing separation"
+      ]
+    },
+    "dietaryRecommendation": "Space doses at least 2 hours before or 4 hours after consuming calcium-rich dairy products (milk, yogurt, cheese)."
+  },
+  {
+    "id": "dfi-amlodipine-grapefruit",
+    "type": "DRUG_FOOD",
+    "drug": {
+      "id": "med-amlodipine",
+      "name": "Amlodipine",
+      "genericName": "Amlodipine Besylate",
+      "dosage": "5mg",
+      "category": "Calcium Channel Blocker"
+    },
+    "food": {
+      "id": "food-grapefruit",
+      "name": "Grapefruit / Grapefruit Juice",
+      "category": "FRUIT",
+      "commonExamples": ["Fresh grapefruit", "Grapefruit juice"]
+    },
+    "severity": "MODERATE",
+    "patientExplanation": {
+      "summary": "Grapefruit juice may moderately increase Amlodipine levels in your blood, causing blood pressure to drop lower than intended.",
+      "whatItMeans": "Grapefruit can slow down liver enzymes that break down this blood pressure medication.",
+      "whyItMatters": "May cause dizziness, flushing, headaches, or swollen ankles due to excessive blood vessel relaxation.",
+      "actionAdvice": "Avoid drinking large amounts of grapefruit juice while taking Amlodipine."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Inhibition of intestinal CYP3A4 by grapefruit juice can modestly increase systemic amlodipine bioavailability, exacerbating peripheral vasodilation and orthostasis.",
+      "evidenceLevel": "PROBABLE",
+      "suggestedAction": "Monitor sitting and standing blood pressure; evaluate for peripheral edema.",
+      "monitoringParameters": [
+        "Blood pressure and heart rate",
+        "Clinical assessment for peripheral ankle edema"
+      ]
+    },
+    "dietaryRecommendation": "Limit or avoid large consumption of grapefruit and its juice during amlodipine therapy."
+  }
+]

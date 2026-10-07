@@ -1,0 +1,204 @@
+[
+  {
+    "id": "ddi-warfarin-aspirin",
+    "type": "DRUG_DRUG",
+    "primaryDrug": {
+      "id": "med-warfarin",
+      "name": "Warfarin",
+      "genericName": "Warfarin Sodium",
+      "dosage": "5mg",
+      "category": "Anticoagulant"
+    },
+    "interactingDrug": {
+      "id": "med-aspirin",
+      "name": "Aspirin",
+      "genericName": "Acetylsalicylic acid",
+      "dosage": "75mg",
+      "category": "Antiplatelet / NSAID"
+    },
+    "severity": "CRITICAL",
+    "patientExplanation": {
+      "summary": "Taking Warfarin together with Aspirin significantly increases your risk of severe internal bleeding.",
+      "whatItMeans": "Both medications thin your blood using different mechanisms. Combining them doubles the anti-clotting effect.",
+      "whyItMatters": "Even minor injuries or unnoticed stomach ulcers could cause dangerous internal bleeding.",
+      "actionAdvice": "Do not discontinue abruptly, but immediately consult your prescribing physician to check if both are essential."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Synergistic antihemostatic effect: Warfarin inhibits vitamin K-dependent clotting factors while Aspirin irreversibly inhibits platelet COX-1. Increases severe bleeding incidence 3-5 fold.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Re-evaluate indication for concurrent dual antithrombotic therapy. If mandatory, monitor INR strictly and consider gastroprotective co-therapy with a PPI.",
+      "monitoringParameters": [
+        "INR (International Normalized Ratio)",
+        "Hemoglobin / Hematocrit",
+        "Stool occult blood"
+      ],
+      "alternativesForReview": [
+        {
+          "id": "alt-paracetamol",
+          "medicineName": "Paracetamol (Acetaminophen)",
+          "rationale": "If Aspirin is taken solely for mild analgesia or antipyresis, low-dose paracetamol carries substantially lower bleeding risk.",
+          "requiresPrescription": false,
+          "safetyNote": "Possible alternative for clinician review only. Do not alter medication without physician consultation."
+        }
+      ]
+    },
+    "documentationUrl": "https://ncbi.nlm.nih.gov/books/NBK534248/"
+  },
+  {
+    "id": "ddi-warfarin-ciprofloxacin",
+    "type": "DRUG_DRUG",
+    "primaryDrug": {
+      "id": "med-warfarin",
+      "name": "Warfarin",
+      "genericName": "Warfarin Sodium",
+      "dosage": "5mg",
+      "category": "Anticoagulant"
+    },
+    "interactingDrug": {
+      "id": "med-ciprofloxacin",
+      "name": "Ciprofloxacin",
+      "genericName": "Ciprofloxacin Hydrochloride",
+      "dosage": "500mg",
+      "category": "Fluoroquinolone Antibiotic"
+    },
+    "severity": "HIGH",
+    "patientExplanation": {
+      "summary": "Ciprofloxacin causes Warfarin to stay in your body longer and work much more strongly than normal.",
+      "whatItMeans": "The antibiotic slows down liver breakdown of Warfarin and reduces gut bacteria that produce natural blood-clotting vitamin K.",
+      "whyItMatters": "Your blood can become excessively thin without you knowing, leading to unexplained bruising, dark stools, or severe bleeding.",
+      "actionAdvice": "Tell your doctor immediately that you take Warfarin before starting this antibiotic. A rapid blood test (INR) is typically scheduled within 2 to 3 days."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Ciprofloxacin inhibits hepatic CYP1A2 and CYP3A4 metabolism of Warfarin and reduces intestinal vitamin K-producing flora, leading to precipitous INR elevation and coagulopathy.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Monitor INR at baseline and 48-72 hours after starting Ciprofloxacin. Consider empirically reducing Warfarin dosage by 30-50% during antibiotic course.",
+      "monitoringParameters": [
+        "INR within 48-72 hours of antimicrobial initiation",
+        "Clinical surveillance for petechiae, epistaxis, or hematuria"
+      ],
+      "alternativesForReview": [
+        {
+          "id": "alt-amoxicillin",
+          "medicineName": "Alternative Non-Quinolone Antibiotic",
+          "rationale": "Depending on antimicrobial culture/susceptibility, beta-lactams exhibit significantly less pharmacokinetic CYP disruption with Warfarin.",
+          "requiresPrescription": true,
+          "safetyNote": "Possible alternative for clinician review only. Do not alter medication without physician consultation."
+        }
+      ]
+    },
+    "documentationUrl": "https://pubmed.ncbi.nlm.nih.gov/11263884/"
+  },
+  {
+    "id": "ddi-warfarin-atorvastatin",
+    "type": "DRUG_DRUG",
+    "primaryDrug": {
+      "id": "med-warfarin",
+      "name": "Warfarin",
+      "genericName": "Warfarin Sodium",
+      "dosage": "5mg",
+      "category": "Anticoagulant"
+    },
+    "interactingDrug": {
+      "id": "med-atorvastatin",
+      "name": "Atorvastatin",
+      "genericName": "Atorvastatin Calcium",
+      "dosage": "20mg",
+      "category": "Statin / Lipid-lowering"
+    },
+    "severity": "MODERATE",
+    "patientExplanation": {
+      "summary": "Atorvastatin may moderately increase the blood thinning effects of Warfarin.",
+      "whatItMeans": "Both medications share overlapping processing pathways in the liver, which can mildly elevate Warfarin concentration in the bloodstream.",
+      "whyItMatters": "Small changes in Warfarin strength can shift your coagulation balance out of its safe target range.",
+      "actionAdvice": "Your physician will typically request a routine INR check when beginning or increasing your statin dose."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Competitive CYP3A4/CYP2C9 metabolism and protein binding displacement can mildly prolong prothrombin time and elevate steady-state INR.",
+      "evidenceLevel": "PROBABLE",
+      "suggestedAction": "Obtain baseline INR upon initiating or titrating Atorvastatin; re-evaluate INR within 3-5 days.",
+      "monitoringParameters": [
+        "INR within 3-5 days of statin dose adjustment"
+      ],
+      "alternativesForReview": [
+        {
+          "id": "alt-rosuvastatin",
+          "medicineName": "Rosuvastatin / Pravastatin",
+          "rationale": "Statins minimally dependent on CYP3A4/CYP2C9 metabolism exhibit reduced pharmacokinetic displacement with coumarin anticoagulants.",
+          "requiresPrescription": true,
+          "safetyNote": "Possible alternative for clinician review only. Do not alter medication without physician consultation."
+        }
+      ]
+    },
+    "documentationUrl": "https://ncbi.nlm.nih.gov/books/NBK534248/"
+  },
+  {
+    "id": "ddi-aspirin-clopidogrel",
+    "type": "DRUG_DRUG",
+    "primaryDrug": {
+      "id": "med-aspirin",
+      "name": "Aspirin",
+      "genericName": "Acetylsalicylic acid",
+      "dosage": "75mg",
+      "category": "Antiplatelet / NSAID"
+    },
+    "interactingDrug": {
+      "id": "med-clopidogrel",
+      "name": "Clopidogrel",
+      "genericName": "Clopidogrel Bisulfate",
+      "dosage": "75mg",
+      "category": "Antiplatelet / P2Y12 Inhibitor"
+    },
+    "severity": "HIGH",
+    "patientExplanation": {
+      "summary": "Combining Aspirin with Clopidogrel provides dual anti-clotting action, significantly elevating stomach and bodily bleeding risks.",
+      "whatItMeans": "Each drug blocks a different trigger for blood clotting, making it difficult for the body to seal bleeding vessels.",
+      "whyItMatters": "Major gastrointestinal hemorrhage, blood in urine, or severe bruising can occur, especially in patients over 65.",
+      "actionAdvice": "Take exactly as directed by your cardiologist. Promptly report any black tarry stools, unusual nosebleeds, or persistent bruises."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Dual Antiplatelet Therapy (DAPT) irreversibly blocks COX-1 thromboxane A2 and ADP P2Y12 receptor activation, substantially increasing major gastrointestinal and extracranial hemorrhage.",
+      "evidenceLevel": "ESTABLISHED",
+      "suggestedAction": "Ensure DAPT indication is time-limited per guidelines (e.g. post-PCI / acute coronary syndrome). Prescribe concurrent proton pump inhibitor (PPI) gastroprotection in elderly patients.",
+      "monitoringParameters": [
+        "Complete Blood Count / Hemoglobin baseline and periodic",
+        "Clinical surveillance for occult gastrointestinal blood loss"
+      ]
+    },
+    "documentationUrl": "https://pubmed.ncbi.nlm.nih.gov/17015837/"
+  },
+  {
+    "id": "ddi-metformin-ciprofloxacin",
+    "type": "DRUG_DRUG",
+    "primaryDrug": {
+      "id": "med-metformin",
+      "name": "Metformin",
+      "genericName": "Metformin Hydrochloride",
+      "dosage": "500mg",
+      "category": "Antidiabetic / Biguanide"
+    },
+    "interactingDrug": {
+      "id": "med-ciprofloxacin",
+      "name": "Ciprofloxacin",
+      "genericName": "Ciprofloxacin Hydrochloride",
+      "dosage": "500mg",
+      "category": "Fluoroquinolone Antibiotic"
+    },
+    "severity": "MODERATE",
+    "patientExplanation": {
+      "summary": "Ciprofloxacin can alter your blood sugar levels unpredictably when taken with Metformin.",
+      "whatItMeans": "Fluoroquinolone antibiotics can stimulate insulin release and affect how your cells process glucose.",
+      "whyItMatters": "May cause sudden low blood sugar (hypoglycemia) with shakiness, cold sweats, or confusion, particularly in older adults.",
+      "actionAdvice": "Check your blood sugar more frequently while taking this antibiotic. Keep fast-acting glucose tablets or juice nearby."
+    },
+    "doctorSummary": {
+      "clinicalMechanism": "Fluoroquinolones block ATP-sensitive potassium channels in pancreatic beta cells, stimulating excessive insulin release and predisposing elderly diabetic patients to severe dysglycemia.",
+      "evidenceLevel": "PROBABLE",
+      "suggestedAction": "Advise patient to increase capillary blood glucose monitoring frequency during antibiotic therapy. Educate on hypoglycemia symptoms.",
+      "monitoringParameters": [
+        "Fasting and postprandial capillary blood glucose",
+        "Renal function parameters (eGFR / Serum Creatinine)"
+      ]
+    },
+    "documentationUrl": "https://pubmed.ncbi.nlm.nih.gov/24056247/"
+  }
+]
