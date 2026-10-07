@@ -1,0 +1,106 @@
+/* Global Clinical Healthcare Design System */
+:root {
+  /* Brand & Neutral Palette */
+  --color-primary: #0d9488;
+  --color-primary-hover: #0f766e;
+  --color-primary-light: #ccfbf1;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-text-main: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-subtle: #94a3b8;
+
+  /* Clinical Severity Tokens */
+  --severity-low: #059669;
+  --severity-low-bg: #ecfdf5;
+  --severity-low-border: #a7f3d0;
+
+  --severity-moderate: #d97706;
+  --severity-moderate-bg: #fffbeb;
+  --severity-moderate-border: #fde68a;
+
+  --severity-high: #ea580c;
+  --severity-high-bg: #fff7ed;
+  --severity-high-border: #fed7aa;
+
+  --severity-critical: #dc2626;
+  --severity-critical-bg: #fef2f2;
+  --severity-critical-border: #fecaca;
+
+  /* Typography & Spacing */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Common Severity Badge Utility Classes */
+.badge-low {
+  background-color: var(--severity-low-bg);
+  color: var(--severity-low);
+  border: 1px solid var(--severity-low-border);
+}
+
+.badge-moderate {
+  background-color: var(--severity-moderate-bg);
+  color: var(--severity-moderate);
+  border: 1px solid var(--severity-moderate-border);
+}
+
+.badge-high {
+  background-color: var(--severity-high-bg);
+  color: var(--severity-high);
+  border: 1px solid var(--severity-high-border);
+}
+
+.badge-critical {
+  background-color: var(--severity-critical-bg);
+  color: var(--severity-critical);
+  border: 1px solid var(--severity-critical-border);
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

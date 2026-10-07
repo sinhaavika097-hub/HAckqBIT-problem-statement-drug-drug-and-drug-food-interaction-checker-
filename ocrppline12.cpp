@@ -28,6 +28,8 @@ int main() {
     cv::imwrite(outputPath, cleaned);
     
     std::cout << "Success! Preprocessed image saved as: " << outputPath << std::endl;
+
+    // --- OCR Extraction ---
     tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
     if (ocr->Init("C:/msys64/ucrt64/share/tessdata", "eng")) {
         std::cerr << "Error: Could not initialize tesseract." << std::endl;
