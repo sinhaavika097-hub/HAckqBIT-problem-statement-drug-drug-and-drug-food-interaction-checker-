@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build OCR Project",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-IC:/msys64/ucrt64/include",
+                "-IC:/msys64/ucrt64/include/opencv4",
+                "-LC:/msys64/ucrt64/lib",
+                "-lopencv_core",
+                "-lopencv_imgcodecs",
+                "-lopencv_imgproc",
+                "-ltesseract",
+                "-lleptonica"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+
