@@ -9,9 +9,16 @@ import {
   SupportedLanguage,
   ExtractedMedicine,
 } from './types/interactions';
-import { getInteractionsForMedicine, getGraphData, searchMedicines } from './services/interactionService';
+import {
+  getInteractionsForMedicine,
+  getGraphData,
+  searchMedicines,
+  getMultiMedicineInteractions,
+} from './services/interactionService';
+import { MOCK_MEDICINES } from './services/mockData';
 import { Header } from './components/Header';
 import { MedicineSearch } from './components/MedicineSearch';
+import { RegimenBag } from './components/RegimenBag';
 import { InteractionGraph } from './components/InteractionGraph';
 import { InteractionDetails } from './components/InteractionDetails';
 import { PrescriptionUpload } from './components/PrescriptionUpload';
@@ -30,12 +37,53 @@ export const App: React.FC = () => {
   const [selectedInteraction, setSelectedInteraction] = useState<DrugDrugInteraction | DrugFoodInteraction | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
+  const [regimen, setRegimen] = useState<Medicine[]>([MOCK_MEDICINES[0], MOCK_MEDICINES[1]]);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [serviceError, setServiceError] = useState<string | null>(null);
+
+  const handleRemoveFromRegimen = (id: string) => {
+    setRegimen((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  const handleCheckRegimen = async (medsToCheck = regimen) => {
+    if (medsToCheck.length === 0) return;
+    setIsLoading(true);
+    setServiceError(null);
+
+    const res = await getMultiMedicineInteractions(medsToCheck.map((m) => m.id));
+    setIsLoading(false);
+
+    if (res.error) {
+      setServiceError(res.error);
+    } else if (res.data) {
+      setGraphData(res.data.graphData);
+      setDrugInteractions(res.data.drugInteractions);
+      setFoodInteractions(res.data.foodInteractions);
+      if (res.data.drugInteractions.length > 0) {
+        setSelectedInteraction(res.data.drugInteractions[0]);
+        setSelectedNodeId(res.data.drugInteractions[0].interactingDrug.id);
+      } else if (res.data.foodInteractions.length > 0) {
+        setSelectedInteraction(res.data.foodInteractions[0]);
+        setSelectedNodeId(res.data.foodInteractions[0].food.id);
+      } else {
+        setSelectedInteraction(null);
+        setSelectedNodeId(null);
+      }
+    }
+  };
+
+  const handleLoadElderlyPreset = async () => {
+    const preset = MOCK_MEDICINES.slice(0, 5);
+    setRegimen(preset);
+    setSelectedMedicine(preset[0]);
+    await handleCheckRegimen(preset);
+  };
 
   // Load interactions & graph whenever selected medicine changes
   const loadMedicineInteractions = useCallback(async (medicine: Medicine) => {
     setSelectedMedicine(medicine);
+    setRegimen((prev) => (prev.some((m) => m.id === medicine.id) ? prev : [...prev, medicine]));
     setIsLoading(true);
     setServiceError(null);
 
@@ -108,17 +156,32 @@ export const App: React.FC = () => {
   // Handle OCR confirmed medicines
   const handleOcrConfirm = async (confirmedList: ExtractedMedicine[]) => {
     if (confirmedList.length === 0) return;
-    const firstMedName = confirmedList[0].normalizedName;
-    const res = await searchMedicines(firstMedName);
-    if (res.data && res.data.length > 0) {
-      await loadMedicineInteractions(res.data[0]);
-    } else {
-      // Fallback medicine entity if not directly in mock catalogue
-      await loadMedicineInteractions({
-        id: `ocr-${Date.now()}`,
-        name: firstMedName,
-        category: 'Extracted Prescription Medication',
-      });
+
+    const newMeds: Medicine[] = [];
+    for (const item of confirmedList) {
+      const match = MOCK_MEDICINES.find(
+        (m) => m.name.toLowerCase() === item.normalizedName.toLowerCase()
+      );
+      if (match) {
+        newMeds.push(match);
+      } else {
+        newMeds.push({
+          id: `ocr-${item.id}`,
+          name: item.normalizedName,
+          dosage: item.dosage,
+          category: 'Prescription Medication',
+        });
+      }
+    }
+
+    setRegimen(newMeds);
+    if (newMeds.length > 0) {
+      setSelectedMedicine(newMeds[0]);
+      if (newMeds.length >= 2) {
+        await handleCheckRegimen(newMeds);
+      } else {
+        await loadMedicineInteractions(newMeds[0]);
+      }
     }
     setActiveTab('EXPLORER');
   };
@@ -197,13 +260,23 @@ export const App: React.FC = () => {
         {activeTab === 'EXPLORER' && (
           <div>
             {/* Search Section */}
-            <div style={{ marginBottom: '28px' }}>
+            <div style={{ marginBottom: '20px' }}>
               <MedicineSearch
                 currentLanguage={currentLanguage}
                 selectedMedicine={selectedMedicine}
                 onSelectMedicine={loadMedicineInteractions}
               />
             </div>
+
+            {/* Polypharmacy Medication Bag */}
+            <RegimenBag
+              regimen={regimen}
+              currentLanguage={currentLanguage}
+              onRemoveMedicine={handleRemoveFromRegimen}
+              onLoadElderlyPreset={handleLoadElderlyPreset}
+              onCheckRegimen={() => handleCheckRegimen(regimen)}
+              isChecking={isLoading}
+            />
 
             {/* Error Banner */}
             {serviceError && (
