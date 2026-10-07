@@ -45,6 +45,7 @@ FRONTEND/
     ├── components/
     │   ├── Header.tsx           # Branding bar, safety notice, & language selector
     │   ├── MedicineSearch.tsx   # Autocomplete search & quick-select test pills
+    │   ├── RegimenBag.tsx       # 5-medication polypharmacy bag & elderly presets
     │   ├── InteractionGraph.tsx # Radial SVG interaction network with zoom/pan
     │   ├── InteractionDetails.tsx# Patient View (Voice TTS) & Doctor View (Alternatives)
     │   └── PrescriptionUpload.tsx# OCR preview, editable normalization, & verification
@@ -68,7 +69,8 @@ The frontend connects to the C++ backend through `src/services/interactionServic
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/api/v1/medicines/search?q={query}` | Autocomplete search for medicines by name or generic |
-| `GET` | `/api/v1/interactions?medicine_id={id}` | Retrieve Drug-Drug and Drug-Food interaction records |
+| `GET` | `/api/v1/interactions?medicine_id={id}` | Retrieve single medicine Drug-Drug and Drug-Food interaction records |
+| `POST` | `/api/v1/interactions/regimen` | Retrieve multi-drug cross-interaction network for full polypharmacy regimens |
 | `GET` | `/api/v1/graph?medicine_id={id}` | Retrieve node & edge data for interactive visualization |
 | `POST` | `/api/v1/ocr/scan` (`multipart/form-data`) | Prescription image upload and OCR extraction |
 
