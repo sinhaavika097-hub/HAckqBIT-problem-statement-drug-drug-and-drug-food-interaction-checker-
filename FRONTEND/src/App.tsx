@@ -22,12 +22,14 @@ import { RegimenBag } from './components/RegimenBag';
 import { InteractionGraph } from './components/InteractionGraph';
 import { InteractionDetails } from './components/InteractionDetails';
 import { PrescriptionUpload } from './components/PrescriptionUpload';
+import { ClinicalReportModal } from './components/ClinicalReportModal';
 import { t } from './utils/localization';
-import { Activity, FileText, Sparkles, AlertCircle, Loader2 } from 'lucide-react';
+import { Activity, FileText, Sparkles, AlertCircle, Loader2, Printer } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>('en');
   const [activeTab, setActiveTab] = useState<'EXPLORER' | 'OCR'>('EXPLORER');
+  const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
 
   const [selectedMedicine, setSelectedMedicine] = useState<Medicine | null>(null);
   const [graphData, setGraphData] = useState<InteractionGraphData>({ nodes: [], edges: [] });
@@ -193,11 +195,15 @@ export const App: React.FC = () => {
 
       {/* Main App Content Container */}
       <main style={{ flex: 1, maxWidth: '1280px', width: '100%', margin: '0 auto', padding: '24px 16px' }}>
-        {/* Navigation Mode Selector */}
+        {/* Navigation Mode & Action Selector */}
         <div
+          className="no-print"
           style={{
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
+            gap: '12px',
+            flexWrap: 'wrap',
             marginBottom: '24px',
           }}
         >
@@ -254,6 +260,28 @@ export const App: React.FC = () => {
               <span>{t('ocrTab', currentLanguage)}</span>
             </button>
           </div>
+
+          <button
+            type="button"
+            onClick={() => setIsReportModalOpen(true)}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 18px',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--color-primary)',
+              backgroundColor: '#ffffff',
+              color: 'var(--color-primary)',
+              fontWeight: 600,
+              fontSize: '0.88rem',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <Printer size={17} />
+            <span>Clinical Audit Report &amp; PDF</span>
+          </button>
         </div>
 
         {/* Tab 1: Interaction Explorer Flow */}
@@ -459,6 +487,16 @@ export const App: React.FC = () => {
             <PrescriptionUpload currentLanguage={currentLanguage} onConfirmMedicines={handleOcrConfirm} />
           </div>
         )}
+
+        {/* Clinical Safety Audit Report Modal */}
+        <ClinicalReportModal
+          isOpen={isReportModalOpen}
+          onClose={() => setIsReportModalOpen(false)}
+          regimen={regimen}
+          drugInteractions={drugInteractions}
+          foodInteractions={foodInteractions}
+          currentLanguage={currentLanguage}
+        />
       </main>
 
       {/* Footer & Compliance Notice */}
