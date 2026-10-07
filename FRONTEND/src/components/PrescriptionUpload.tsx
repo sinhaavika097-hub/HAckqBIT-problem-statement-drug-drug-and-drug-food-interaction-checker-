@@ -37,6 +37,10 @@ export const PrescriptionUpload: React.FC<PrescriptionUploadProps> = ({
     await runOcr(file);
   };
 
+  const handleSampleRx = async () => {
+    // Generate a placeholder mock file to simulate upload
+    const mockBlob = new Blob(['sample prescription image'], { type: 'image/png' });
+    const mockFile = new File([mockBlob], 'rx_sample.png', { type: 'image/png' });
     // Offline-resilient embedded SVG prescription preview
     const sampleRxSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240"><rect width="100%" height="100%" fill="%23fdfbf7" stroke="%23cbd5e1" stroke-width="2"/><text x="20" y="32" font-family="serif" font-size="16" font-weight="bold" fill="%230f172a">CITY HEALTH CLINIC</text><text x="20" y="50" font-family="sans-serif" font-size="11" fill="%2364748b">Dr. R. Sharma, MD &bull; Reg: 84920</text><line x1="20" y1="60" x2="380" y2="60" stroke="%2394a3b8" stroke-dasharray="2 2"/><text x="20" y="90" font-family="serif" font-size="22" font-weight="bold" fill="%230d9488">&#8478;</text><text x="50" y="105" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">1. Tab Warfarin 5mg &mdash; OD</text><text x="50" y="135" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">2. Tab Ecosprin 75mg &mdash; BD</text><text x="50" y="165" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">3. Tab Atorva 20mg &mdash; HS</text><text x="250" y="215" font-family="cursive" font-size="14" fill="%232563eb">Dr. R. Sharma</text></svg>`;
     setImagePreview(sampleRxSvg);
