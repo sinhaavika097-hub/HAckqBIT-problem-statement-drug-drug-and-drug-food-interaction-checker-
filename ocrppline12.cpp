@@ -27,7 +27,7 @@ int main() {
     std::string outputPath = "cleaned_prscpton.png";
     cv::imwrite(outputPath, cleaned);
     
-    std::cout << "Success! Preprocessed image saved as: " << outputPath << std::endl
+    std::cout << "Success! Preprocessed image saved as: " << outputPath << std::endl;
 
 
 
