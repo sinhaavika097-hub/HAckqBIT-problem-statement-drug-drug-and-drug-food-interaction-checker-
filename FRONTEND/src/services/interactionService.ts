@@ -22,7 +22,8 @@ import {
 
 // Configuration: Switch between isolated mock data and live C++ backend
 const USE_MOCK_DATA = true;
-const API_BASE_URL = (typeof process !== 'undefined' && process.env?.VITE_API_BASE_URL) || 'http://localhost:8080/api/v1';
+const API_BASE_URL =
+  (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || 'http://localhost:8080/api/v1';
 
 export interface ServiceResponse<T> {
   data: T | null;
