@@ -7,7 +7,7 @@ import {
   SupportedLanguage,
 } from '../types/interactions';
 import { t } from '../utils/localization';
-import { ZoomIn, ZoomOut, RotateCcw, Pill, Utensils, AlertTriangle } from 'lucide-react';
+import { ZoomIn, ZoomOut, RotateCcw, Pill, Utensils } from 'lucide-react';
 
 interface InteractionGraphProps {
   data: InteractionGraphData;
