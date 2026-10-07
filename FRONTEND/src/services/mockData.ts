@@ -120,6 +120,26 @@ export const MOCK_DRUG_DRUG_INTERACTIONS: DrugDrugInteraction[] = [
     },
     documentationUrl: 'https://ncbi.nlm.nih.gov/books/NBK534248/',
   },
+  {
+    id: 'ddi-warfarin-atorvastatin',
+    type: 'DRUG_DRUG',
+    primaryDrug: MOCK_MEDICINES[0], // Warfarin
+    interactingDrug: MOCK_MEDICINES[2], // Atorvastatin
+    severity: 'MODERATE',
+    patientExplanation: {
+      summary: 'Atorvastatin may moderately increase the blood thinning effects of Warfarin.',
+      whatItMeans: 'Both medications are processed by overlapping liver pathways, which may slightly elevate Warfarin concentration in the blood.',
+      whyItMatters: 'Small changes in Warfarin strength can alter blood clotting balance.',
+      actionAdvice: 'Your doctor may request a routine blood test (INR) when starting or adjusting your statin dose.',
+    },
+    doctorSummary: {
+      clinicalMechanism: 'Competitive CYP3A4 / CYP2C9 metabolism and protein binding displacement can mildly prolong prothrombin time.',
+      evidenceLevel: 'PROBABLE',
+      suggestedAction: 'Monitor baseline INR upon initiating or titrating Atorvastatin.',
+      monitoringParameters: ['INR within 3-5 days of dose adjustment'],
+    },
+    documentationUrl: 'https://ncbi.nlm.nih.gov/books/NBK534248/',
+  },
 ];
 
 export const MOCK_DRUG_FOOD_INTERACTIONS: DrugFoodInteraction[] = [
@@ -151,6 +171,26 @@ export const MOCK_DRUG_FOOD_INTERACTIONS: DrugFoodInteraction[] = [
       ],
     },
     dietaryRecommendation: 'Avoid grapefruit and Seville oranges completely during therapy. Citrus fruits such as sweet oranges, lemons, and limes are generally acceptable.',
+  },
+  {
+    id: 'dfi-metformin-alcohol',
+    type: 'DRUG_FOOD',
+    drug: MOCK_MEDICINES[3], // Metformin
+    food: MOCK_FOODS[3], // Alcohol
+    severity: 'HIGH',
+    patientExplanation: {
+      summary: 'Drinking alcohol with Metformin significantly elevates the risk of lactic acidosis, a rare but dangerous metabolic condition.',
+      whatItMeans: 'Alcohol impairs your liver ability to process lactate, while Metformin also increases lactic acid production.',
+      whyItMatters: 'Can cause severe exhaustion, muscle cramps, and difficulty breathing requiring emergency care.',
+      actionAdvice: 'Avoid excessive or binge alcohol consumption while taking Metformin.',
+    },
+    doctorSummary: {
+      clinicalMechanism: 'Ethanol oxidation increases NADH/NAD+ ratio, inhibiting hepatic gluconeogenesis from lactate and predisposing to lactic acidosis.',
+      evidenceLevel: 'ESTABLISHED',
+      suggestedAction: 'Counsel patient regarding moderate or zero alcohol intake; assess baseline eGFR.',
+      monitoringParameters: ['Serum bicarbonate', 'Serum lactate', 'eGFR / Creatinine'],
+    },
+    dietaryRecommendation: 'Avoid excessive or binge alcohol consumption. Moderate alcohol only with meals if approved by physician.',
   },
   {
     id: 'dfi-ciprofloxacin-dairy',
@@ -195,7 +235,7 @@ export const MOCK_DRUG_FOOD_INTERACTIONS: DrugFoodInteraction[] = [
 ];
 
 /**
- * Builds mock graph nodes and edges centered around a selected medicine
+ * Builds mock graph nodes and edges centered around a single selected medicine
  */
 export function buildMockGraphData(primaryMedicine: Medicine): InteractionGraphData {
   const nodes: InteractionGraphData['nodes'] = [
@@ -248,6 +288,72 @@ export function buildMockGraphData(primaryMedicine: Medicine): InteractionGraphD
         severity: dfi.severity,
         label: `${dfi.severity} Risk: ${dfi.food.name}`,
       });
+    }
+  }
+
+  return { nodes, edges };
+}
+
+/**
+ * Builds a multi-medicine regimen graph showing cross-interactions across all medications
+ */
+export function buildMultiMedicineGraphData(medicines: Medicine[]): InteractionGraphData {
+  const nodes: InteractionGraphData['nodes'] = medicines.map((med) => ({
+    id: med.id,
+    label: med.name,
+    subLabel: med.category,
+    type: 'PRIMARY_DRUG',
+  }));
+
+  const edges: InteractionGraphData['edges'] = [];
+  const addedFoodIds = new Set<string>();
+
+  // Check all pairwise Drug-Drug interactions in the regimen
+  for (let i = 0; i < medicines.length; i++) {
+    for (let j = i + 1; j < medicines.length; j++) {
+      const medA = medicines[i];
+      const medB = medicines[j];
+
+      const match = MOCK_DRUG_DRUG_INTERACTIONS.find(
+        (ddi) =>
+          (ddi.primaryDrug.id === medA.id && ddi.interactingDrug.id === medB.id) ||
+          (ddi.primaryDrug.id === medB.id && ddi.interactingDrug.id === medA.id)
+      );
+
+      if (match) {
+        edges.push({
+          id: match.id,
+          source: medA.id,
+          target: medB.id,
+          type: 'DRUG_DRUG',
+          severity: match.severity,
+          label: `${match.severity}: ${medA.name} ↔ ${medB.name}`,
+        });
+      }
+    }
+
+    // Include relevant Drug-Food interactions for each medicine in regimen
+    for (const dfi of MOCK_DRUG_FOOD_INTERACTIONS) {
+      if (dfi.drug.id === medicines[i].id) {
+        if (!addedFoodIds.has(dfi.food.id)) {
+          nodes.push({
+            id: dfi.food.id,
+            label: dfi.food.name,
+            subLabel: dfi.food.category,
+            type: 'FOOD',
+            severity: dfi.severity,
+          });
+          addedFoodIds.add(dfi.food.id);
+        }
+        edges.push({
+          id: dfi.id,
+          source: medicines[i].id,
+          target: dfi.food.id,
+          type: 'DRUG_FOOD',
+          severity: dfi.severity,
+          label: `${dfi.severity}: ${medicines[i].name} ↔ ${dfi.food.name}`,
+        });
+      }
     }
   }
 
