@@ -94,3 +94,13 @@ select:focus-visible {
   color: var(--severity-critical);
   border: 1px solid var(--severity-critical-border);
 }
+
+/* Spinner Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
