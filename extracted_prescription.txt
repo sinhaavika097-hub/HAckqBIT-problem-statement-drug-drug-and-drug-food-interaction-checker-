@@ -1,0 +1,18 @@
+APEX MULTI-SPECIALTY CLINIC & GERIATRIC CARE
+Dr. R. K. Sharma, MD (Medicine), DM (Cardiology)
+Reg. No: MED-IN-94821 | Date: 12-Oct-2026
+Patient: S. K. Mukherjee (Age: 72, Male)
+Diagnosis: Atrial Fibrillation, Type 2 DM, Dyslipidemia, Suspected UTI
+
+Rx:
+1. Tab Warfarin 5mg OD (Night after food)
+2. Tab Ecosprin 75mg OD (Aspirin - Post-lunch)
+3. Tab Atorvastatin 20mg OD (Bedtime)
+4. Tab Glycomet 500mg BD (Metformin - Before meals)
+5. Tab Ciprofloxacin 500mg BD x 5 days
+
+Notes:
+- Regular PT/INR monitoring advised every 2 weeks.
+- Avoid concurrent NSAIDs or excessive green leafy vegetables without consult.
+- Review in OPD after 7 days with renal and coagulation profile.
+[Verified Digital Signature: Dr. R. K. Sharma]
