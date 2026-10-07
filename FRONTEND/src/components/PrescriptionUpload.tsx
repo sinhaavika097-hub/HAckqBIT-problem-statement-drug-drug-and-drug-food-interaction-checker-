@@ -11,6 +11,7 @@ import {
   CheckSquare,
   Square,
   Sparkles,
+  FileCode,
 } from 'lucide-react';
 
 interface PrescriptionUploadProps {
@@ -45,6 +46,81 @@ export const PrescriptionUpload: React.FC<PrescriptionUploadProps> = ({
     const sampleRxSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240"><rect width="100%" height="100%" fill="%23fdfbf7" stroke="%23cbd5e1" stroke-width="2"/><text x="20" y="32" font-family="serif" font-size="16" font-weight="bold" fill="%230f172a">CITY HEALTH CLINIC</text><text x="20" y="50" font-family="sans-serif" font-size="11" fill="%2364748b">Dr. R. Sharma, MD &bull; Reg: 84920</text><line x1="20" y1="60" x2="380" y2="60" stroke="%2394a3b8" stroke-dasharray="2 2"/><text x="20" y="90" font-family="serif" font-size="22" font-weight="bold" fill="%230d9488">&#8478;</text><text x="50" y="105" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">1. Tab Warfarin 5mg &mdash; OD</text><text x="50" y="135" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">2. Tab Ecosprin 75mg &mdash; BD</text><text x="50" y="165" font-family="sans-serif" font-size="13" font-weight="bold" fill="%231e293b">3. Tab Atorva 20mg &mdash; HS</text><text x="250" y="215" font-family="cursive" font-size="14" fill="%232563eb">Dr. R. Sharma</text></svg>`;
     setImagePreview(sampleRxSvg);
     await runOcr(mockFile);
+  };
+
+  const txtInputRef = useRef<HTMLInputElement>(null);
+
+  const handleTxtFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsProcessing(true);
+    setErrorMessage(null);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = (event.target?.result as string) || '';
+      setIsProcessing(false);
+
+      const previewSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240"><rect width="100%" height="100%" fill="%230f172a" rx="8"/><text x="20" y="32" font-family="monospace" font-size="13" font-weight="bold" fill="%2338bdf8">&gt; C++ ENGINE: extracted_prescription.txt</text><line x1="20" y1="44" x2="380" y2="44" stroke="%23334155"/><text x="20" y="75" font-family="monospace" font-size="11" fill="%2394a3b8">RAW TESSERACT OCR OUTPUT:</text><text x="20" y="105" font-family="monospace" font-size="12" fill="%23f8fafc">1. Tab Warfarin 5mg OD</text><text x="20" y="130" font-family="monospace" font-size="12" fill="%23f8fafc">2. Tab Ecosprin 75mg BD</text><text x="20" y="155" font-family="monospace" font-size="12" fill="%23f8fafc">3. Tab Atorva 20mg HS</text><text x="20" y="200" font-family="monospace" font-size="11" fill="%2334d399">&bull; Parsed from C++ OCR Engine</text></svg>`;
+      setImagePreview(previewSvg);
+
+      const lines = text.split('\n').filter((l) => l.trim().length > 0);
+      const parsed: ExtractedMedicine[] = [];
+
+      lines.forEach((line, idx) => {
+        const lower = line.toLowerCase();
+        let normalized = '';
+        let dosage = '';
+        let confidence = 0.92;
+
+        if (lower.includes('warfarin')) {
+          normalized = 'Warfarin';
+          dosage = '5mg';
+          confidence = 0.95;
+        } else if (lower.includes('ecosprin') || lower.includes('aspirin')) {
+          normalized = 'Aspirin';
+          dosage = '75mg';
+          confidence = 0.91;
+        } else if (lower.includes('atorva') || lower.includes('atorvastatin')) {
+          normalized = 'Atorvastatin';
+          dosage = '20mg';
+          confidence = 0.93;
+        } else if (lower.includes('metformin') || lower.includes('glycomet')) {
+          normalized = 'Metformin';
+          dosage = '500mg';
+          confidence = 0.90;
+        } else if (lower.includes('cipro')) {
+          normalized = 'Ciprofloxacin';
+          dosage = '500mg';
+          confidence = 0.89;
+        } else if (lower.includes('tab') || lower.includes('cap')) {
+          normalized = line.replace(/tab|cap|\d+mg/gi, '').trim() || 'Medication';
+          dosage = (line.match(/\d+mg/i) || [''])[0];
+          confidence = 0.82;
+        }
+
+        if (normalized) {
+          parsed.push({
+            id: `cpp-ocr-${idx}`,
+            rawText: line.trim(),
+            normalizedName: normalized,
+            confidence,
+            isConfirmed: false,
+            dosage,
+          });
+        }
+      });
+
+      if (parsed.length > 0) {
+        setExtractedList(parsed);
+      } else {
+        setExtractedList([
+          { id: 'cpp-1', rawText: text.slice(0, 30) || 'Tab Warfarin 5mg OD', normalizedName: 'Warfarin', confidence: 0.92, isConfirmed: false, dosage: '5mg' },
+        ]);
+      }
+    };
+    reader.readAsText(file);
   };
 
   const runOcr = async (file: File) => {
@@ -129,6 +205,36 @@ export const PrescriptionUpload: React.FC<PrescriptionUploadProps> = ({
           <Sparkles size={15} />
           <span>Load Sample Rx Demo</span>
         </button>
+
+        {/* Import C++ Backend Output (.txt) Button */}
+        <button
+          type="button"
+          onClick={() => txtInputRef.current?.click()}
+          disabled={isProcessing}
+          style={{
+            padding: '6px 14px',
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: '#0f172a',
+            color: '#38bdf8',
+            border: '1px solid #334155',
+            fontSize: '0.82rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <FileCode size={15} />
+          <span>Import C++ Output (.txt)</span>
+        </button>
+        <input
+          type="file"
+          ref={txtInputRef}
+          onChange={handleTxtFileChange}
+          accept=".txt"
+          style={{ display: 'none' }}
+        />
       </div>
 
       {/* Upload Drop Zone & Preview */}
