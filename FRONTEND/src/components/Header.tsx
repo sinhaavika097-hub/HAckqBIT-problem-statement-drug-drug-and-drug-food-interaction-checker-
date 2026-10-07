@@ -6,9 +6,10 @@ import { ShieldAlert, Languages, HeartPulse } from 'lucide-react';
 interface HeaderProps {
   currentLanguage: SupportedLanguage;
   onLanguageChange: (lang: SupportedLanguage) => void;
+  isBackendLive?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentLanguage, onLanguageChange }) => {
+export const Header: React.FC<HeaderProps> = ({ currentLanguage, onLanguageChange, isBackendLive = false }) => {
   return (
     <header style={{ borderBottom: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
       {/* Top Clinical Safety Alert Banner */}
@@ -77,6 +78,30 @@ export const Header: React.FC<HeaderProps> = ({ currentLanguage, onLanguageChang
               >
                 Bio-Pharma Safety
               </span>
+              <span
+                style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  backgroundColor: isBackendLive ? '#ecfdf5' : '#fffbeb',
+                  color: isBackendLive ? '#047857' : '#b45309',
+                  padding: '2px 8px',
+                  borderRadius: 'var(--radius-full)',
+                  border: isBackendLive ? '1px solid #a7f3d0' : '1px solid #fde68a',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: isBackendLive ? '#10b981' : '#f59e0b',
+                  }}
+                />
+                {isBackendLive ? 'Live C++ Engine' : 'Offline Demo Mode'}
+              </span>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
               {t('appSubtitle', currentLanguage)}
@@ -114,3 +139,4 @@ export const Header: React.FC<HeaderProps> = ({ currentLanguage, onLanguageChang
     </header>
   );
 };
+
