@@ -70,5 +70,95 @@
     "dosage": "650mg",
     "category": "Analgesic / Antipyretic",
     "atcCode": "N02BE01"
+  },
+  {
+    "id": "med-metoprolol",
+    "name": "Metoprolol",
+    "genericName": "Metoprolol Tartrate / Succinate",
+    "brandNames": ["Lopressor", "Toprol-XL", "Betaloc", "Metolar"],
+    "dosage": "50mg",
+    "category": "Beta-Blocker / Antihypertensive",
+    "atcCode": "C07AB02"
+  },
+  {
+    "id": "med-omeprazole",
+    "name": "Omeprazole",
+    "genericName": "Omeprazole Magnesium",
+    "brandNames": ["Prilosec", "Omez", "Losec"],
+    "dosage": "20mg",
+    "category": "Proton Pump Inhibitor (PPI)",
+    "atcCode": "A02BC01"
+  },
+  {
+    "id": "med-digoxin",
+    "name": "Digoxin",
+    "genericName": "Digoxin",
+    "brandNames": ["Lanoxin", "Digox"],
+    "dosage": "0.25mg",
+    "category": "Cardiac Glycoside / Antiarrhythmic",
+    "atcCode": "C01AA05"
+  },
+  {
+    "id": "med-levothyroxine",
+    "name": "Levothyroxine",
+    "genericName": "Levothyroxine Sodium",
+    "brandNames": ["Synthroid", "Eltroxin", "Thyronorm"],
+    "dosage": "50mcg",
+    "category": "Thyroid Hormone",
+    "atcCode": "H03AA01"
+  },
+  {
+    "id": "med-furosemide",
+    "name": "Furosemide",
+    "genericName": "Furosemide",
+    "brandNames": ["Lasix", "Frusix"],
+    "dosage": "40mg",
+    "category": "Loop Diuretic",
+    "atcCode": "C03CA01"
+  },
+  {
+    "id": "med-lisinopril",
+    "name": "Lisinopril",
+    "genericName": "Lisinopril Dihydrate",
+    "brandNames": ["Zestril", "Prinivil", "Lipril"],
+    "dosage": "10mg",
+    "category": "ACE Inhibitor / Antihypertensive",
+    "atcCode": "C09AA03"
+  },
+  {
+    "id": "med-spironolactone",
+    "name": "Spironolactone",
+    "genericName": "Spironolactone",
+    "brandNames": ["Aldactone", "Spiractin"],
+    "dosage": "25mg",
+    "category": "Potassium-Sparing Diuretic / Aldosterone Antagonist",
+    "atcCode": "C03DA01"
+  },
+  {
+    "id": "med-rosuvastatin",
+    "name": "Rosuvastatin",
+    "genericName": "Rosuvastatin Calcium",
+    "brandNames": ["Crestor", "Rosuvas", "Rozavel"],
+    "dosage": "10mg",
+    "category": "Statin / Lipid-lowering",
+    "atcCode": "C10AA07"
+  },
+  {
+    "id": "med-pantoprazole",
+    "name": "Pantoprazole",
+    "genericName": "Pantoprazole Sodium",
+    "brandNames": ["Protonix", "Pan", "Pantocid"],
+    "dosage": "40mg",
+    "category": "Proton Pump Inhibitor (PPI)",
+    "atcCode": "A02BC02"
+  },
+  {
+    "id": "med-losartan",
+    "name": "Losartan",
+    "genericName": "Losartan Potassium",
+    "brandNames": ["Cozaar", "Losacar", "Repace"],
+    "dosage": "50mg",
+    "category": "Angiotensin II Receptor Blocker (ARB)",
+    "atcCode": "C09CA01"
   }
 ]
