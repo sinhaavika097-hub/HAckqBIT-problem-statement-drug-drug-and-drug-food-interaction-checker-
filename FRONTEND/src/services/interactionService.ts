@@ -54,7 +54,7 @@ export async function checkBackendHealth(): Promise<{ isLive: boolean; message: 
   try {
     const res = await fetchWithTimeout('http://127.0.0.1:8080/health', {}, 1000);
     if (res.ok) {
-      return { isLive: true, message: 'Connected to PolySafe C++ Engine' };
+      return { isLive: true, message: 'Connected to Presci-Check C++ Engine' };
     }
   } catch {
     // Backend offline

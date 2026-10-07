@@ -38,7 +38,7 @@ export const ClinicalReportModal: React.FC<ClinicalReportModalProps> = ({
 
   const handleExportJson = () => {
     const reportData = {
-      reportTitle: 'PolySafe Clinical Interaction & Polypharmacy Safety Audit',
+      reportTitle: 'Presci-Check Clinical Interaction & Polypharmacy Safety Audit',
       generatedAt: new Date().toISOString(),
       patientRegimen: regimen.map((m) => ({ id: m.id, name: m.name, generic: m.genericName, category: m.category })),
       summary: {
@@ -69,7 +69,7 @@ export const ClinicalReportModal: React.FC<ClinicalReportModalProps> = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `polysafe-clinical-report-${Date.now()}.json`;
+    link.download = `presci-check-clinical-report-${Date.now()}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -201,7 +201,7 @@ export const ClinicalReportModal: React.FC<ClinicalReportModalProps> = ({
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-primary)', margin: 0 }}>
-                  PolySafe 🩺 Polypharmacy Safety Audit
+                  Presci-Check 📋 Polypharmacy Safety Audit
                 </h1>
                 <p style={{ margin: '4px 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.85rem' }}>
                   Biomedical Decision Support &amp; Adverse Reaction Surveillance
@@ -385,7 +385,7 @@ export const ClinicalReportModal: React.FC<ClinicalReportModalProps> = ({
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-border)' }}>
               <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-                Generated via PolySafe Clinical Decision-Support System
+                Generated via Presci-Check Clinical Decision-Support System
               </div>
               <div style={{ textAlign: 'center', width: '220px' }}>
                 <div style={{ borderBottom: '1px solid #000000', marginBottom: '4px', height: '24px' }}></div>

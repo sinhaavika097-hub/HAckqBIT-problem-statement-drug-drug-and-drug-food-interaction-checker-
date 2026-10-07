@@ -43,7 +43,7 @@ export interface TranslationDictionary {
 
 export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
   en: {
-    appTitle: 'PolySafe',
+    appTitle: 'Presci-Check',
     appSubtitle: 'Drug-Drug & Drug-Food Interaction Checker for Polypharmacy Patients',
     safetyDisclaimer:
       'Medical Safety Notice: This system is a clinical decision-support prototype. Never alter or discontinue medications without consulting your prescribing physician.',
@@ -73,7 +73,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     emptyStatePrompt: 'Enter a medicine above or upload a prescription to explore potential safety interactions.',
   },
   hi: {
-    appTitle: 'पॉली-सेफ (PolySafe)',
+    appTitle: 'प्रेस्की-चेक (Presci-Check)',
     appSubtitle: 'पॉलीफार्मेसी मरीजों के लिए दवा-दवा और दवा-भोजन परस्पर प्रभाव जांच प्रणाली',
     safetyDisclaimer:
       'चिकित्सा सुरक्षा सूचना: यह प्रणाली केवल एक प्रोटोटाइप है। अपने डॉक्टर से परामर्श किए बिना कभी भी दवा बंद या शुरू न करें।',
@@ -103,7 +103,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     emptyStatePrompt: 'संभावित दुष्प्रभावों की जांच करने के लिए ऊपर दवा का नाम लिखें या पर्चा अपलोड करें।',
   },
   bn: {
-    appTitle: 'পলি-সেফ (PolySafe)',
+    appTitle: 'প্রেসকি-চেক (Presci-Check)',
     appSubtitle: 'পলিফার্মেসি রোগীদের জন্য ওষুধ-ওষুধ এবং ওষুধ-খাবার মিথস্ক্রিয়া পরীক্ষক',
     safetyDisclaimer:
       'চিকিৎসা সতর্কতা: এই সিস্টেমটি কেবল একটি পরীক্ষামূলক সহায়ক। ডাক্তারের পরামর্শ ছাড়া কোনো ওষুধ বন্ধ বা পরিবর্তন করবেন না।',

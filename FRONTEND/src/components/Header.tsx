@@ -1,7 +1,7 @@
 import React from 'react';
 import { SupportedLanguage } from '../types/interactions';
 import { t } from '../utils/localization';
-import { ShieldAlert, Languages, HeartPulse } from 'lucide-react';
+import { ShieldAlert, Languages, FileText } from 'lucide-react';
 
 interface HeaderProps {
   currentLanguage: SupportedLanguage;
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLanguage, onLanguageChang
               justifyContent: 'center',
             }}
           >
-            <HeartPulse size={28} />
+            <FileText size={28} />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
