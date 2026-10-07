@@ -3,7 +3,6 @@ import { ExtractedMedicine, SupportedLanguage } from '../types/interactions';
 import { processPrescriptionOcr } from '../services/interactionService';
 import { t } from '../utils/localization';
 import {
-  Upload,
   FileText,
   CheckCircle2,
   Edit3,
